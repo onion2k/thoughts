@@ -1,0 +1,50 @@
+.App {
+  position: relative;
+  width: 50vmin;
+  height: 75vh;
+}
+
+.bubble {
+  position: absolute;
+  top: 0;
+  width: 50vmin;
+  z-index: 2;
+  filter: drop-shadow(-12px 5px 12px rgba(0, 0, 0, 0.3));
+  color: grey;
+}
+
+.flip {
+  transform: scaleX(-1);
+}
+
+.bubble > svg path {
+  fill: white;
+  stroke: currentColor;
+}
+
+.person {
+  height: 100%;
+  width: 50vmin;
+  background-color: black;
+}
+
+.fade:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 58%,
+    rgba(255, 255, 255, 0) 63%
+  );
+  z-index: 1;
+}
+
+.person > img {
+  position: absolute;
+  bottom: 0;
+  width: 50vmin;
+}
