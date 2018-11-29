@@ -5,9 +5,6 @@
   border-radius: 10px;
   display: flex;
   align-items: flex-end;
-}
-
-.black {
   background-color: black;
 }
 
@@ -15,9 +12,30 @@
   position: absolute;
   top: 0;
   width: 50vmin;
+  height: 40vh;
   z-index: 2;
   filter: drop-shadow(-12px 5px 12px rgba(0, 0, 0, 0.3));
   color: grey;
+}
+
+.content-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50vmin;
+  height: 30vh;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-inner {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 4.5em;
+  text-align: center;
+  max-width: 30vmin;
+  color: black;
 }
 
 .flip {
@@ -45,7 +63,6 @@
 }
 
 .person {
-  width: 50vmin;
   height: 40vh;
 }
 

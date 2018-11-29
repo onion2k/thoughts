@@ -20,10 +20,13 @@ class App extends Component {
   render() {
     const person = require("./people/riker.jpg");
     return (
-      <div className="App black">
+      <div className="App">
         <div className="bubble flip">{shapes[2]}</div>
-        <div className="person fade">
+        <div className="person">
           <img src={person} alt="Person" />
+        </div>
+        <div className="content-outer">
+          <div className="content-inner">What the fuck?</div>
         </div>
       </div>
     );
