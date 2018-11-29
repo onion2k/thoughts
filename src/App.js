@@ -1,5 +1,9 @@
+/* global faceapi */
+
 import React, { Component } from "react";
 import "./App.css";
+
+// const faceDectect = faceapi.loadSsdMobilenetv1Model("/models");
 
 const shapes = [
   <svg viewBox="0 0 100 150">
@@ -17,13 +21,25 @@ const shapes = [
 ];
 
 class App extends Component {
+  componentDidMount() {
+    faceapi
+      .loadSsdMobilenetv1Model("/models")
+      .then(() => {
+        const input = document.getElementById("person");
+        return faceapi.detectSingleFace(input);
+      })
+      .then(faces => {
+        console.log(faces);
+      });
+  }
   render() {
-    const person = require("./people/riker.jpg");
+    const person = require("./people/elon.jpg");
+
     return (
       <div className="App">
         <div className="bubble flip">{shapes[2]}</div>
         <div className="person">
-          <img src={person} alt="Person" />
+          <img id="person" src={person} alt="Person" />
         </div>
         <div className="content-outer">
           <div className="content-inner">What the fuck?</div>
