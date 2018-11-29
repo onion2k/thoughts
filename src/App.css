@@ -1,7 +1,14 @@
 .App {
   position: relative;
   width: 50vmin;
-  height: 75vh;
+  height: 80vh;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.black {
+  background-color: black;
 }
 
 .bubble {
@@ -22,12 +29,6 @@
   stroke: currentColor;
 }
 
-.person {
-  height: 100%;
-  width: 50vmin;
-  background-color: black;
-}
-
 .fade:before {
   content: "";
   position: absolute;
@@ -37,14 +38,22 @@
   left: 0;
   background-image: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 1) 58%,
-    rgba(255, 255, 255, 0) 63%
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0) 53%
   );
   z-index: 1;
 }
 
-.person > img {
-  position: absolute;
-  bottom: 0;
+.person {
   width: 50vmin;
+  height: 40vh;
+}
+
+img {
+  border-radius: 0 0 10px 10px;
+  width: 50vmin;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: 50% 100%;
 }

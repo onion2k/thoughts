@@ -18,11 +18,11 @@ const shapes = [
 
 class App extends Component {
   render() {
-    const person = require("./people/elon.jpg");
+    const person = require("./people/riker.jpg");
     return (
-      <div className="App">
-        <div className="bubble flip">{shapes[3]}</div>
-        <div className="person">
+      <div className="App black">
+        <div className="bubble flip">{shapes[2]}</div>
+        <div className="person fade">
           <img src={person} alt="Person" />
         </div>
       </div>
