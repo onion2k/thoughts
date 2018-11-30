@@ -4,6 +4,9 @@ import React, { Component } from "react";
 import "./App.css";
 
 // const faceDectect = faceapi.loadSsdMobilenetv1Model("/models");
+const faceapiModel = faceapi.loadSsdMobilenetv1Model("/models").then(() => {
+  return faceapi.loadFaceLandmarkModel("/models");
+});
 
 const shapes = [
   <svg viewBox="0 0 100 150">
@@ -22,11 +25,7 @@ const shapes = [
 
 class App extends Component {
   componentDidMount() {
-    faceapi
-      .loadSsdMobilenetv1Model("/models")
-      .then(() => {
-        return faceapi.loadFaceLandmarkModel("/models");
-      })
+    faceapiModel
       .then(() => {
         const input = document.getElementById("person");
         return faceapi
@@ -41,19 +40,7 @@ class App extends Component {
           const { width, height } = dimensions;
           canvas.width = width;
           canvas.height = height;
-
-          // resize detections (and landmarks) in case displayed image is smaller than
-          // original size
           return results.map(res => res.forSize(width, height));
-        }
-
-        function drawDetections(dimensions, canvas, detections) {
-          const resizedDetections = resizeCanvasAndResults(
-            dimensions,
-            canvas,
-            detections
-          );
-          faceapi.drawDetection(canvas, resizedDetections);
         }
 
         function drawLandmarks(dimensions, canvas, results, withBoxes = true) {
@@ -79,11 +66,12 @@ class App extends Component {
           faceapi.drawLandmarks(canvas, faceLandmarks, drawLandmarksOptions);
         }
 
+        console.log(results);
         drawLandmarks(input, canvas, results, true);
       });
   }
   render() {
-    const person = require("./people/picard.jpg");
+    const person = require("./people/elon.jpg");
 
     return (
       <div className="App">
@@ -93,7 +81,7 @@ class App extends Component {
           <canvas id="markers" className="markers" />
         </div>
         <div className="content-outer">
-          <div className="content-inner">What the fuck?</div>
+          <div className="content-inner">AI thought bubbles?</div>
         </div>
       </div>
     );
