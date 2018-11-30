@@ -71,7 +71,7 @@ class App extends Component {
       });
   }
   render() {
-    const person = require("./people/elon.jpg");
+    const person = require("./people/trump.jpg");
 
     return (
       <div className="App">
