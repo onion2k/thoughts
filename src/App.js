@@ -25,21 +25,72 @@ class App extends Component {
     faceapi
       .loadSsdMobilenetv1Model("/models")
       .then(() => {
-        const input = document.getElementById("person");
-        return faceapi.detectSingleFace(input);
+        return faceapi.loadFaceLandmarkModel("/models");
       })
-      .then(faces => {
-        console.log(faces);
+      .then(() => {
+        const input = document.getElementById("person");
+        return faceapi
+          .detectAllFaces(input, new faceapi.SsdMobilenetv1Options())
+          .withFaceLandmarks();
+      })
+      .then(results => {
+        const canvas = document.getElementById("markers");
+        const input = document.getElementById("person");
+
+        function resizeCanvasAndResults(dimensions, canvas, results) {
+          const { width, height } = dimensions;
+          canvas.width = width;
+          canvas.height = height;
+
+          // resize detections (and landmarks) in case displayed image is smaller than
+          // original size
+          return results.map(res => res.forSize(width, height));
+        }
+
+        function drawDetections(dimensions, canvas, detections) {
+          const resizedDetections = resizeCanvasAndResults(
+            dimensions,
+            canvas,
+            detections
+          );
+          faceapi.drawDetection(canvas, resizedDetections);
+        }
+
+        function drawLandmarks(dimensions, canvas, results, withBoxes = true) {
+          const resizedResults = resizeCanvasAndResults(
+            dimensions,
+            canvas,
+            results
+          );
+
+          if (withBoxes) {
+            faceapi.drawDetection(
+              canvas,
+              resizedResults.map(det => det.detection)
+            );
+          }
+
+          const faceLandmarks = resizedResults.map(det => det.landmarks);
+          const drawLandmarksOptions = {
+            lineWidth: 2,
+            drawLines: true,
+            color: "green"
+          };
+          faceapi.drawLandmarks(canvas, faceLandmarks, drawLandmarksOptions);
+        }
+
+        drawLandmarks(input, canvas, results, true);
       });
   }
   render() {
-    const person = require("./people/elon.jpg");
+    const person = require("./people/picard.jpg");
 
     return (
       <div className="App">
         <div className="bubble flip">{shapes[2]}</div>
         <div className="person">
           <img id="person" src={person} alt="Person" />
+          <canvas id="markers" className="markers" />
         </div>
         <div className="content-outer">
           <div className="content-inner">What the fuck?</div>

@@ -66,6 +66,17 @@
   height: 40vh;
 }
 
+.markers {
+  padding: 0;
+  margin: 0;
+  object-fit: cover;
+  width: 50vmin;
+  height: 100%;
+  overflow: hidden;
+  object-position: 50% 100%;
+  z-index: 2;
+}
+
 img {
   border-radius: 0 0 10px 10px;
   width: 50vmin;
