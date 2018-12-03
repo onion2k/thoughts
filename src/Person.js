@@ -33,47 +33,11 @@ class Person extends Component {
         const canvas = document.getElementById("markers");
         const input = document.getElementById("person");
 
-        function resizeCanvasAndResults(dimensions, canvas, results) {
-          const { width, height } = dimensions;
-          canvas.width = width;
-          canvas.height = height;
-          return results.map(res => res.forSize(width, height));
-        }
+        const { width, height } = input;
+        canvas.width = width;
+        canvas.height = height;
+        const resizedResults = results.map(res => res.forSize(width, height));
 
-        // function drawLandmarks(
-        //   dimensions,
-        //   canvas,
-        //   resizedResults,
-        //   withBoxes = true
-        // ) {
-        //   // const resizedResults = resizeCanvasAndResults(
-        //   //   dimensions,
-        //   //   canvas,
-        //   //   results
-        //   // );
-
-        //   if (withBoxes) {
-        //     faceapi.drawDetection(
-        //       canvas,
-        //       resizedResults.map(det => det.detection)
-        //     );
-        //   }
-
-        //   const faceLandmarks = resizedResults.map(det => det.landmarks);
-        //   const drawLandmarksOptions = {
-        //     lineWidth: 2,
-        //     drawLines: true,
-        //     color: "green"
-        //   };
-        //   return faceapi.drawLandmarks(
-        //     canvas,
-        //     faceLandmarks,
-        //     drawLandmarksOptions
-        //   );
-        // }
-
-        const resizedResults = resizeCanvasAndResults(input, canvas, results);
-        // drawLandmarks(input, canvas, resizedResults, true);
         const box = resizedResults[0].alignedRect.box;
         this.props.updateBubble(box.left + (box.right - box.left) / 2, box.top);
       });
