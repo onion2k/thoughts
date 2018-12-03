@@ -14,7 +14,7 @@ class Person extends Component {
     super();
     this.imageRef = React.createRef();
   }
-  onDrop(acceptedFiles, rejectedFiles) {
+  onDrop(acceptedFiles) {
     acceptedFiles.map(file => {
       this.imageRef.current.src = URL.createObjectURL(file);
       this.detect();
