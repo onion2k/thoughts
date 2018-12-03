@@ -16,6 +16,7 @@
   z-index: 2;
   filter: drop-shadow(-12px 5px 12px rgba(0, 0, 0, 0.3));
   color: grey;
+  pointer-events: none;
 }
 
 .content-outer {
@@ -72,17 +73,18 @@
   left: 0;
   padding: 0;
   margin: 0;
-  object-fit: cover;
+  /* object-fit: cover; */
   overflow: hidden;
   object-position: 50% 100%;
   z-index: 2;
+  pointer-events: none;
 }
 
 img {
   border-radius: 0 0 10px 10px;
   width: 50vmin;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  /* object-fit: cover; */
   overflow: hidden;
   object-position: 50% 100%;
 }

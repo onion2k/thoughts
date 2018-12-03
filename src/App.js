@@ -1,12 +1,8 @@
 /* global faceapi */
 
 import React, { Component } from "react";
+import Person from "./Person.js";
 import "./App.css";
-
-// const faceDectect = faceapi.loadSsdMobilenetv1Model("/models");
-const faceapiModel = faceapi.loadSsdMobilenetv1Model("/models").then(() => {
-  return faceapi.loadFaceLandmarkModel("/models");
-});
 
 const shapes = [
   <svg viewBox="0 0 100 150">
@@ -24,62 +20,11 @@ const shapes = [
 ];
 
 class App extends Component {
-  componentDidMount() {
-    faceapiModel
-      .then(() => {
-        const input = document.getElementById("person");
-        return faceapi
-          .detectAllFaces(input, new faceapi.SsdMobilenetv1Options())
-          .withFaceLandmarks();
-      })
-      .then(results => {
-        const canvas = document.getElementById("markers");
-        const input = document.getElementById("person");
-
-        function resizeCanvasAndResults(dimensions, canvas, results) {
-          const { width, height } = dimensions;
-          canvas.width = width;
-          canvas.height = height;
-          return results.map(res => res.forSize(width, height));
-        }
-
-        function drawLandmarks(dimensions, canvas, results, withBoxes = true) {
-          const resizedResults = resizeCanvasAndResults(
-            dimensions,
-            canvas,
-            results
-          );
-
-          if (withBoxes) {
-            faceapi.drawDetection(
-              canvas,
-              resizedResults.map(det => det.detection)
-            );
-          }
-
-          const faceLandmarks = resizedResults.map(det => det.landmarks);
-          const drawLandmarksOptions = {
-            lineWidth: 2,
-            drawLines: true,
-            color: "green"
-          };
-          faceapi.drawLandmarks(canvas, faceLandmarks, drawLandmarksOptions);
-        }
-
-        console.log(results);
-        drawLandmarks(input, canvas, results, true);
-      });
-  }
   render() {
-    const person = require("./people/trump.jpg");
-
     return (
       <div className="App">
         <div className="bubble flip">{shapes[2]}</div>
-        <div className="person">
-          <img id="person" src={person} alt="Person" />
-          <canvas id="markers" className="markers" />
-        </div>
+        <Person />
         <div className="content-outer">
           <div className="content-inner">AI thought bubbles?</div>
         </div>
