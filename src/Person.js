@@ -40,37 +40,37 @@ class Person extends Component {
           return results.map(res => res.forSize(width, height));
         }
 
-        function drawLandmarks(
-          dimensions,
-          canvas,
-          resizedResults,
-          withBoxes = true
-        ) {
-          // const resizedResults = resizeCanvasAndResults(
-          //   dimensions,
-          //   canvas,
-          //   results
-          // );
+        // function drawLandmarks(
+        //   dimensions,
+        //   canvas,
+        //   resizedResults,
+        //   withBoxes = true
+        // ) {
+        //   // const resizedResults = resizeCanvasAndResults(
+        //   //   dimensions,
+        //   //   canvas,
+        //   //   results
+        //   // );
 
-          if (withBoxes) {
-            faceapi.drawDetection(
-              canvas,
-              resizedResults.map(det => det.detection)
-            );
-          }
+        //   if (withBoxes) {
+        //     faceapi.drawDetection(
+        //       canvas,
+        //       resizedResults.map(det => det.detection)
+        //     );
+        //   }
 
-          const faceLandmarks = resizedResults.map(det => det.landmarks);
-          const drawLandmarksOptions = {
-            lineWidth: 2,
-            drawLines: true,
-            color: "green"
-          };
-          return faceapi.drawLandmarks(
-            canvas,
-            faceLandmarks,
-            drawLandmarksOptions
-          );
-        }
+        //   const faceLandmarks = resizedResults.map(det => det.landmarks);
+        //   const drawLandmarksOptions = {
+        //     lineWidth: 2,
+        //     drawLines: true,
+        //     color: "green"
+        //   };
+        //   return faceapi.drawLandmarks(
+        //     canvas,
+        //     faceLandmarks,
+        //     drawLandmarksOptions
+        //   );
+        // }
 
         const resizedResults = resizeCanvasAndResults(input, canvas, results);
         // drawLandmarks(input, canvas, resizedResults, true);
