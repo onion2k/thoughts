@@ -20,14 +20,24 @@ const shapes = [
 ];
 
 class App extends Component {
+  state = { left: 0, top: 0 };
+  updateBubble = this.updateBubble.bind(this);
+  updateBubble(left, top) {
+    this.setState({ left: left - 250, top: top - 80 });
+  }
   render() {
     return (
       <div className="App">
-        <div className="bubble flip">{shapes[2]}</div>
-        <Person />
-        <div className="content-outer">
-          <div className="content-inner">AI thought bubbles?</div>
+        <div
+          className="bubble"
+          style={{ left: this.state.left + "px", top: this.state.top + "px" }}
+        >
+          {shapes[2]}
+          <div className="content-outer">
+            <div className="content-inner">AI thought bubbles?</div>
+          </div>
         </div>
+        <Person updateBubble={this.updateBubble} />
       </div>
     );
   }

@@ -40,12 +40,17 @@ class Person extends Component {
           return results.map(res => res.forSize(width, height));
         }
 
-        function drawLandmarks(dimensions, canvas, results, withBoxes = true) {
-          const resizedResults = resizeCanvasAndResults(
-            dimensions,
-            canvas,
-            results
-          );
+        function drawLandmarks(
+          dimensions,
+          canvas,
+          resizedResults,
+          withBoxes = true
+        ) {
+          // const resizedResults = resizeCanvasAndResults(
+          //   dimensions,
+          //   canvas,
+          //   results
+          // );
 
           if (withBoxes) {
             faceapi.drawDetection(
@@ -60,10 +65,17 @@ class Person extends Component {
             drawLines: true,
             color: "green"
           };
-          faceapi.drawLandmarks(canvas, faceLandmarks, drawLandmarksOptions);
+          return faceapi.drawLandmarks(
+            canvas,
+            faceLandmarks,
+            drawLandmarksOptions
+          );
         }
 
-        drawLandmarks(input, canvas, results, true);
+        const resizedResults = resizeCanvasAndResults(input, canvas, results);
+        // drawLandmarks(input, canvas, resizedResults, true);
+        const box = resizedResults[0].alignedRect.box;
+        this.props.updateBubble(box.left + (box.right - box.left) / 2, box.top);
       });
   }
   componentDidMount() {
