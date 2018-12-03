@@ -10,11 +10,18 @@ const faceapiModel = faceapi.loadSsdMobilenetv1Model("/models").then(() => {
 });
 
 class Person extends Component {
-  onDrop(acceptedFiles, rejectedFiles) {
-    console.log(acceptedFiles);
+  constructor() {
+    super();
+    this.imageRef = React.createRef();
   }
-  onCancel() {}
-  componentDidMount() {
+  onDrop(acceptedFiles, rejectedFiles) {
+    acceptedFiles.map(file => {
+      this.imageRef.current.src = URL.createObjectURL(file);
+      this.detect();
+      return true;
+    });
+  }
+  detect() {
     faceapiModel
       .then(() => {
         const input = document.getElementById("person");
@@ -59,17 +66,21 @@ class Person extends Component {
         drawLandmarks(input, canvas, results, true);
       });
   }
+  componentDidMount() {
+    this.detect();
+  }
   render() {
     const person = require("./people/trump.jpg");
 
     return (
       <Dropzone
+        accept="image/jpeg, image/png"
+        multiple={false}
         className={"Dropzone"}
         onDrop={this.onDrop.bind(this)}
-        onFileDialogCancel={this.onCancel.bind(this)}
       >
         <div className="person">
-          <img id="person" src={person} alt="Person" />
+          <img id="person" src={person} alt="Person" ref={this.imageRef} />
           <canvas id="markers" className="markers" />
         </div>
       </Dropzone>
