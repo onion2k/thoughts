@@ -19,18 +19,26 @@ const shapes = [
   </svg>
 ];
 
+const offsets = [
+  { left: { x: 0, y: 0 }, right: { x: 0, y: 0 } },
+  { left: { x: 180, y: 650 }, right: { x: 570, y: 650 } },
+  { left: { x: 0, y: 0 }, right: { x: 0, y: 0 } },
+  { left: { x: 0, y: 0 }, right: { x: 0, y: 0 } }
+];
+
 class App extends Component {
   state = { width: 720, left: 0, top: 0, aspect: 1 };
+  shape = 1;
   updateBubble = this.updateBubble.bind(this);
   updateBubble(box) {
-    let left = box.left - 570;
-    const top = box.top - 650;
+    let left = box.left - offsets[this.shape].right.x;
+    const top = box.top - offsets[this.shape].right.y;
     let flip = true;
 
     if (box.left > 720 / 2) {
       flip = false;
     } else {
-      left = box.right - 180;
+      left = box.right - offsets[this.shape].left.x;
     }
 
     this.setState({
