@@ -27,15 +27,16 @@ const offsets = [
 ];
 
 class App extends Component {
-  state = { width: 720, left: 0, top: 0, aspect: 1 };
+  state = { width: 360, left: 0, top: 0, aspect: 1 };
   shape = 1;
+  scale = 0.5;
   updateBubble = this.updateBubble.bind(this);
   updateBubble(box) {
     let left = box.left - offsets[this.shape].right.x;
     const top = box.top - offsets[this.shape].right.y;
     let flip = true;
 
-    if (box.left > 720 / 2) {
+    if (box.left > 720 * this.scale) {
       flip = false;
     } else {
       left = box.right - offsets[this.shape].left.x;
@@ -54,7 +55,8 @@ class App extends Component {
           className={`bubble ${this.state.flip ? "flip" : ""}`}
           style={{
             left: this.state.left + "px",
-            top: this.state.top + "px"
+            top: this.state.top + "px",
+            width: "50%"
           }}
         >
           {shapes[1]}
