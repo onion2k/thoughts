@@ -20,20 +20,37 @@ const shapes = [
 ];
 
 class App extends Component {
-  state = { left: 0, top: 0 };
+  state = { width: 720, left: 0, top: 0, aspect: 1 };
   updateBubble = this.updateBubble.bind(this);
-  updateBubble(left, top) {
-    this.setState({ left: left - 250, top: top - 80 });
+  updateBubble(box) {
+    let left = box.left - 570;
+    const top = box.top - 650;
+    let flip = true;
+
+    if (box.left > 720 / 2) {
+      flip = false;
+    } else {
+      left = box.right - 180;
+    }
+
+    this.setState({
+      left: left,
+      top: top,
+      flip: flip
+    });
   }
   render() {
     return (
       <div className="App">
         <div
-          className="bubble"
-          style={{ left: this.state.left + "px", top: this.state.top + "px" }}
+          className={`bubble ${this.state.flip ? "flip" : ""}`}
+          style={{
+            left: this.state.left + "px",
+            top: this.state.top + "px"
+          }}
         >
-          {shapes[2]}
-          <div className="content-outer">
+          {shapes[1]}
+          <div className={`content-outer ${this.state.flip ? "flip" : ""}`}>
             <div className="content-inner">AI thought bubbles?</div>
           </div>
         </div>

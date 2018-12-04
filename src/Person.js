@@ -39,7 +39,8 @@ class Person extends Component {
         const resizedResults = results.map(res => res.forSize(width, height));
 
         const box = resizedResults[0].alignedRect.box;
-        this.props.updateBubble(box.left + (box.right - box.left) / 2, box.top);
+
+        this.props.updateBubble(box);
       });
   }
   componentDidMount() {

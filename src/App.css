@@ -1,7 +1,6 @@
 .App {
   position: relative;
   width: 50vmin;
-  height: 80vh;
   border-radius: 10px;
   display: flex;
   align-items: flex-end;
@@ -15,7 +14,6 @@
   width: 50vmin;
   height: 40vh;
   z-index: 2;
-  filter: drop-shadow(-12px 5px 12px rgba(0, 0, 0, 0.3));
   color: grey;
   pointer-events: none;
 }
@@ -65,7 +63,7 @@
 }
 
 .person {
-  height: 40vh;
+  border-radius: 20px;
 }
 
 .markers {
@@ -83,6 +81,7 @@
 
 img {
   border-radius: 0 0 10px 10px;
+  border-radius: 20px;
   width: 50vmin;
   height: auto;
   /* object-fit: cover; */
