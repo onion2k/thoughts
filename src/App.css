@@ -5,6 +5,7 @@
   display: flex;
   align-items: flex-end;
   background-color: black;
+  border: 1px solid red;
 }
 
 .bubble {

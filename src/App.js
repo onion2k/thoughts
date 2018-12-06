@@ -1,5 +1,3 @@
-/* global faceapi */
-
 import React, { Component } from "react";
 import Bubble from "./Bubble.js";
 import Person from "./Person.js";

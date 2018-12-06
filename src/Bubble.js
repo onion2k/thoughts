@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Dropzone from "react-dropzone";
+// import Dropzone from "react-dropzone";
 
 const shapes = [
   <svg viewBox="0 0 100 150">
@@ -34,10 +34,8 @@ class Person extends Component {
   }
 
   render() {
-    console.log(this.props);
-
+    const top = this.props.box.top - offsets[this.shape].right.y;
     let left = this.props.box.left - offsets[this.shape].right.x;
-    const top = this.props.top - offsets[this.shape].right.y;
     let flip = true;
 
     if (this.props.box.left > 720 * this.scale) {
@@ -51,8 +49,8 @@ class Person extends Component {
         className={`bubble ${flip ? "flip" : ""}`}
         style={{
           left: left + "px",
-          top: top + "px",
-          width: "50%"
+          top: top * this.scale + "px",
+          width: 100 * this.scale + "%"
         }}
       >
         {shapes[1]}
@@ -65,10 +63,3 @@ class Person extends Component {
 }
 
 export default Person;
-
-// <Dropzone
-// accept="image/jpeg, image/png"
-// multiple={false}
-// className={"Dropzone"}
-// onDrop={this.onDrop.bind(this)}
-// >
